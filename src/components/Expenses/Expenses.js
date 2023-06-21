@@ -1,23 +1,23 @@
-import ExpenceItem from './ExpenceItem';
+
 import './Expenses.css'
 import ExpensesFilter from '../ExpenseFilter/ExpenseFilter';
+import ExpensesList from './ExpensesList';
 import { useState } from 'react';
 
 function Expenses(props) {
-    const [filterYear,seFilterYear] = useState('');
+    const [filterYear, seFilterYear] = useState('2023');
 
     const filterExpenseYear = selectedYear => {
         seFilterYear(selectedYear);
-    }
+    };
+    const filteredExpenses = props.expense.filter(Expense =>{
+    return Expense.date.getFullYear().toString() === filterYear;
+    });
+    
     return (
         <div className='expenses'>
-            <div>
-                <ExpensesFilter onFilterChange={filterExpenseYear}/>
-            </div>
-            <ExpenceItem expenses={props.expense[0]} />
-            <ExpenceItem expenses={props.expense[1]} />
-            <ExpenceItem expenses={props.expense[2]} />
-            <ExpenceItem expenses={props.expense[3]} />
+            <ExpensesFilter selected={filterYear} onFilterChange={filterExpenseYear} />
+            <ExpensesList Expenses={filteredExpenses}/>
         </div>
     );
 }
