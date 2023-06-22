@@ -12,6 +12,7 @@ const NewExpense = (props) => {
             id: Math.random().toString()
         };
         props.onNewExpense(ExpenceData);
+        setEnterForm(false);
     }
 
     const addExpenseForm =()=>{
